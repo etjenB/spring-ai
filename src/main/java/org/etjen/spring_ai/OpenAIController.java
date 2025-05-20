@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class OpenAIController {
-    private OpenAiChatModel openAiChatModel;
-    private ChatClient chatClient;
+    private final OpenAiChatModel openAiChatModel;
+    private final ChatClient chatClient;
 
-    public OpenAIController(OpenAiChatModel openAiChatModel) {
+//    public OpenAIController(OpenAiChatModel openAiChatModel) {
+//        this.openAiChatModel = openAiChatModel;
+//        this.chatClient = ChatClient.create(openAiChatModel);
+//    }
+
+    public OpenAIController(OpenAiChatModel openAiChatModel, ChatClient.Builder builder) {
         this.openAiChatModel = openAiChatModel;
-        this.chatClient = ChatClient.create(openAiChatModel);
+        this.chatClient = builder.build();
     }
 
     @GetMapping("api/{message}")
